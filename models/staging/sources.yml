@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: crypto_raw
+    schema: airbyte_db
+    tables:
+      - name: market_prices
+
+  - name: external_sample
+    database: sample_data
+    schema: who
+    tables:
+      - name: ambient_air_quality
+        identifier: ambient_air_quality
