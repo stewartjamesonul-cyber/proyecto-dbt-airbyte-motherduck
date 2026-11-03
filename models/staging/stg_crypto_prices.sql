@@ -6,4 +6,4 @@ SELECT
     market_cap,
     total_volume,
     _airbyte_extracted_at AS loaded_at
-FROM {{ source('crypto_raw', 'market_prices') }}
+FROM {{ source('airbyte_db', 'market_prices') }}

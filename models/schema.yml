@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_who_country
+    description: "Modelo de staging que estandariza los datos de países de la OMS."
+    columns:
+      - name: country_code
+        description: "Código ISO de 3 letras del país."
+        tests:
+          - unique
+          - not_null
+      - name: country_name
+        description: "Nombre oficial del país."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_not_be_null
+
+  - name: stg_crypto_prices
+    description: "Modelo de staging que procesa los precios y métricas de criptomonedas."
+    columns:
+      - name: crypto_id
+        description: "Identificador único de la criptomoneda."
+        tests:
+          - unique
+          - not_null
+      - name: symbol
+        description: "Símbolo de la criptomoneda (ej. BTC, ETH)."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_not_be_null
+      - name: current_price
+        description: "Precio actual de mercado en USD."
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                max_value: 1000000000
+      - name: total_volume
+        description: "Volumen total de negociación."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                max_value: 1000000000000

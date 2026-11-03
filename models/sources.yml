@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: airbyte_db
+    description: "Base de datos extraída por Airbyte."
+    tables:
+      - name: market_prices
+        description: "Tabla cruda con precios de criptomonedas."
+
+  - name: sample_data
+    description: "Datos de muestra de la OMS y otros."
+    tables:
+      - name: who_country
+        description: "Tabla de países de la OMS."
